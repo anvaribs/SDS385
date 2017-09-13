@@ -1,5 +1,5 @@
 ## Excercise 01 ##
 
-This directory host all the files related to the first homework.
+This directory hosts all the files related to the first homework.
 
-Just checking how DILLINGER commits to the github...
+I will add all the related details to this document. However, all the solutions would go into the exercises01-SDS385.tex and exercises01-SDS385.pdf directly. 
