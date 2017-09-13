@@ -5,6 +5,7 @@
 \newcommand{\E}{\mbox{E}}
 
 \usepackage{amsmath}
+\usepackage{enumitem}
 %\usepackage[garamond]{mathdesign}
 \usepackage{url}
 
@@ -75,7 +76,7 @@ $$
 $$
 where $w_i$ is the weight for observation $i$.  (Higher weight means more influence on the answer; the factor of 1/2 is just for convenience, as you'll see later.)
 
-\begin{enumerate}
+\begin{enumerate}[label=(\Alph*)]
 
 \item Rewrite the WLS objective function\footnote{That is, the thing to be minimized.} above in terms of vectors and matrices, and show that $\hat \beta$ is the solution to the following linear system of $P$ equations in $P$ unknowns:
 $$
@@ -119,7 +120,7 @@ We want to estimate $\beta$ by the principle of maximum likelihood.  Note: for b
 
 As an aside, if you have a favorite data set or problem that involves a different GLM---say, a Poisson regression for count data---then feel free to work with that model instead throughout this entire section.  The fact that we're working with a logistic regression isn't essential here; any GLM will do.
 
-\begin{enumerate}
+\begin{enumerate}[label=(\Alph*)]
 \item Start by writing out the negative log likelihood,
 $$
 l(\beta) = - \log \left \{ \prod_{i=1}^N p(y_i \mid \beta) \right \} \, .
