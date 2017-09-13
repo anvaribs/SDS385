@@ -154,12 +154,16 @@ Numerically speaking, is the inversion method the fastest and most stable way to
 
 \bigskip
 {\color{blue}
-The brute force method of solving Eqn. (16) is the \emph{inversion method}, i.e.
+solving Eqn. (12) using the inversion method yields:
 		\begin{align}
 			\hat{\beta} = (X^TWX)^{-1}X^TWy.
 		\end{align} 
-		However, this method is computationally expensive. Therefore I propose an alternative methods to solving this matrix equation using the Cholesky decomposition.\\
-			\textbf{Cholesky Decomposition} \\
+		Inverting a matrix in general is a no no! it is very expensive
+		to invert a matrix in general. It is also not a stable method of
+		solving linear systems. One alternate method based on matrix
+		factorization is Cholesky Decomposition.\\
+
+			\textbf{Cholesky Decomposition Method:} \\
 			Let 
 			\begin{align}
 				C = X^TWX, \;\;D=X^TWy
@@ -170,18 +174,21 @@ The brute force method of solving Eqn. (16) is the \emph{inversion method}, i.e.
 			\end{align}
 			We decompose matrix $C$ into a product of a lower-triangular matrix and an upper-triangular matrix, such that $U=L^T$ so
 			\begin{align}
-				C &= LU = LL^T \therefore \\
-				LL^T\hat{\beta} &= D.
+				C &= LU = LL^T \implies 
+				LL^T\hat{\beta} = D.
 			\end{align}
 			Furthermore we define matrix $A = L^T\hat{\beta}$. Thus we are left with two matrix equations to solve. 
 			\begin{align}
 				LA &= D \\
 				L^T\hat{\beta} &= A
 			\end{align}
-			This method will be much less computationally intensive than the inversion method because R can leverage the fact that the two left-matrices $L$ and $U=L^T$ are triangular. We still must solve matrices $L$ and $L^T$ but this is simpler than taking an inverse of a more complicated matrix $X^TWX$. This is similar to an LU decomposition, with the exception that we necessarily have two triangular matrices that are transposes of one another. Therefore, this method gains a computational advantage over LU decomposition from symmetric exploitation.
+			
+			Here both L and U are triangular and therefore solving these two equations are much less expensive. Therefore, this method 
+			is a much better way of solving the system by taking advantage of the symmetry of the matrix.
+		
+		Cholesky decomposition method:
 			\begin{algorithm}[htp!]
-			 \KwResult{Perform Cholesky decomposition to solve for $\hat{\beta}$}
-			 Cholesky = function($X,y,W$) \{ \\
+			 \{ \\
 			 \vspace{2mm}
 			 Compute $D = X^T W y$ \; 
 			 Compute $C = X^T W X$\; 
@@ -194,13 +201,13 @@ The brute force method of solving Eqn. (16) is the \emph{inversion method}, i.e.
 			 \vspace{2mm}
 			 return$(\hat{\beta}$)\; 
 			 \}
-			 \caption{Pseudocode for implementing Cholesky decomposition method}
+			 \caption{Cholesky Decomposition}
 			\end{algorithm}
 
 
 }
 
-
+\clearpage
 \item Code up functions that implement both the inversion method and your method for an arbitrary $X$, $y$, and weights $W$.  Obviously you shouldn't write your own linear algebra routines for doing things like multiplying or decomposing matrices, but don't use a direct model-fitting function like R's ``lm'' either.   Your actual code should look a lot like the pseudo-code you wrote for the previous part.  Note: be attentive to how you multiply a matrix by a diagonal matrix, or you'll waste a lot of time multiplying stuff by zero.
 
 Now simulate some silly data from the linear model for a range of values of $N$ and $P$.  (Feel free to assume that the weights $w_i$ are all 1.)  It doesn't matter how you do this---e.g.~everything can be Gaussian if you want.  (We're not concerned with statistical principles yet, just with algorithms, and using least squares is a pretty terrible idea for enormous linear models, anyway.)  Just make sure that you explore values of $P$ up into the thousands, and that $N > P$.  Benchmark the performance of the inversion solver and your solver across a range of scenarios.  (In R, a simple library for this purpose is microbenchmark.)
