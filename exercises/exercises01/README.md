@@ -2,4 +2,4 @@
 
 This directory hosts all the files related to the first homework.
 
-I will add all the related details to this document. However, all the solutions would go into the exercises01-SDS385.tex and exercises01-SDS385.pdf directly. 
+I will add all the related details to this document. However, all the solutions would go into the [exercises01-SDS385.tex](exercises01-SDS385.tex) and [exercises01-SDS385.pdf](exercises01-SDS385.pdf) directly. 
