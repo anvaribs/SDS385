@@ -253,6 +253,49 @@ w_i(\beta) =  \frac{1}{1 + \exp\{-x_i^T \beta\}}
 $$
 in your expression.
 
+\bigskip
+{\color{blue}
+We have $y_i \sim \text{Binomial}(m_i, w_i)$, where 
+	\begin{align}
+		w_i = \frac{1}{1+\exp(-x_i^T\beta)}, \;\; 1-w_i = \frac{\exp(-x_i^T\beta)}{1+\exp(-x_i^T\beta)},
+	\end{align}
+	so the negative log likelihood is
+	%
+	%
+	%
+	% LOG LIK FN
+	%
+	%
+	%
+	\begin{align}
+		\ell(\beta) &= -\log \left \{ \prod_{i=1}^N p(y_i | \beta)  \right \} \\
+		&= -\log \left \{ \prod_{i=1}^N \binom {m_i}{y_i}(w_i)^{y_i}(1-w_i)^{m_i-y_i}  \right \} \\
+		&= - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} + y_i \log(w_i) + (m_i-y_i)\log(1-w_i) \right ) \right \} \\
+		&= - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} + y_i \log\left ( \frac{1}{1+\exp(-x_i^T\beta)} \right ) + (m_i-y_i)\log\left ( \frac{\exp(-x_i^T\beta)}{1+\exp(-x_i^T\beta)} \right) \right ) \right \} \\
+		& = - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} - y_i\log(1+\exp(-x_i^T\beta)) - (m_i-y_i)x_i^T\beta -m_i\log(1+\exp(-x_i^T\beta)) + y_i\log(1+\exp(-x_i^T\beta)) \right ) \right \} \\
+		& = - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} - (m_i-y_i)x_i^T\beta -m_i\log(1+\exp(-x_i^T\beta)) \right ) \right \} \\
+		& = \sum_{i=1}^{N} \left ((m_i-y_i)x_i^T\beta +m_i\log(1+\exp(-x_i^T\beta)) - \log\binom {m_i}{y_i} \right ) \label{finalll}
+		%%%
+		%%%
+		%%%
+	\end{align}
+	The gradient for this expression is, 
+	%
+	%
+	%
+	% GRAD FN
+	%
+	%
+	%
+	\begin{align}
+		\nabla \ell (\beta) &= \sum_{i=1}^N \left ( (m_i-y_i)x_i - m_i \frac{\exp({-x_i^T\beta})}{1+\exp(-x_i^T\beta)}x_i \right ) \\
+		&= \sum_{i=1}^N \left ( (m_i-y_i)x_i - m_i (1-w_i)x_i \right ) \\
+		&= \sum_{i=1}^N (m_iw_i-y_i)x_i \\
+		&= -X^T(y-mw)
+	\end{align}
+	where $y$ is the $n \times 1$ vector of responses and $mw$ is the element-wise product of the two $n \times 1$ vectors $m$ and $w$.
+
+}
 
 \item Read up on the method of steepest descent, i.e.~gradient descent, in Nocedal and Wright (see course website).  Write your own function that will fit a logistic regression model by gradient descent.  Grab the data ``wdbc.csv'' from the course website, or obtain some other real data that interests you, and test it out.  The WDBC file has information on 569 breast-cancer patients from a study done in Wisconsin.  The first column is a patient ID, the second column is a classification of a breast cell (Malignant or Benign), and the next 30 columns are measurements computed from a digitized image of the cell nucleus.  These are things like radius, smoothness, etc.  For this problem, use the first 10 features for $X$, i.e.~columns 3-12 of the file.  If you use all 30 features you'll run into trouble.
 
