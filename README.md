@@ -1,3 +1,6 @@
+**NOTE:** This is a forked version of [jgscott/SDS385](https://github.com/jgscott/SDS385). In this repo, I will host all the materials related to the course SDS385 D - Statistical Models for Big Data.
+
+
 # SDS385
 
 Welcome to SDS 385, a Ph.D.-level course on statistical models for big data.  All course materials can be found through this GitHub page.  
