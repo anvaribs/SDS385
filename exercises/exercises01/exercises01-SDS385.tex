@@ -1,10 +1,27 @@
-  \documentclass{mynotes}
+  \documentclass{article}
 
 %\geometry{showframe}% for debugging purposes -- displays the margins
 
 \newcommand{\E}{\mbox{E}}
 
 \usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+%\usepackage{couriernew} % Required for the courier font
+\usepackage{amssymb}
+\usepackage{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage[thinlines]{easytable}
+
+
+
+
 %\usepackage[garamond]{mathdesign}
 \usepackage{url}
 
@@ -13,7 +30,12 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{graphics/}}
 
-\title[Exercises 1 $\cdot$ SDS 385]{Exercises 1: Preliminaries}
+
+\title{Amin Anvari}
+\date{}
+\author{SDS 385D - Statistical Models for Big Data\\ Assignment 1}
+
+% \title[Exercises 1 $\cdot$ SDS 385]{Exercises 1: Preliminaries}
 %\author[ ]{ }
 \date{}  % if the \date{} command is left out, the current date will be used
 
@@ -53,7 +75,8 @@
 
 \begin{document}
 
-\maketitle% this prints the handout title, author, and date
+% \maketitle% this prints the handout title, author, and date
+\maketitle
 
 \section{Linear regression}
 
@@ -69,7 +92,7 @@ $$
 $$
 where $w_i$ is the weight for observation $i$.  (Higher weight means more influence on the answer; the factor of 1/2 is just for convenience, as you'll see later.)
 
-\begin{enumerate}[(A)]
+\begin{enumerate}[label=(\Alph*)]
 
 \item Rewrite the WLS objective function\footnote{That is, the thing to be minimized.} above in terms of vectors and matrices, and show that $\hat \beta$ is the solution to the following linear system of $P$ equations in $P$ unknowns:
 $$
@@ -77,10 +100,114 @@ $$
 $$
 where $W$ is the diagonal matrix of weights.
 
+
+\bigskip
+{\color{blue}
+Let's first write the (WLS) objective function in terms of vectors and matrices:
+		\begin{align}
+			\hat{\beta} &= \argmin_{\beta \in \mathbb{R}^p} \sum_{i=1}^{N} \frac{w_i}{2} \left ( y_i - x_i^T\beta \right )^2 \\
+			&= \argmin_{\beta \in \mathbb{R}^p} \frac{1}{2} (Y-X \beta)^T W (Y-X\beta).
+		\end{align}
+		Expanding the term in the objective function yielda
+		\begin{align}
+			\frac{1}{2} (Y-X \beta)^T W (Y-X\beta) &= \frac{1}{2} (Y^T - \beta^T X^T)W(Y-X\beta) \\
+			&= \frac{1}{2} (Y^TW - \beta^T X^TW)(Y-X\beta) \\
+			&= \frac{1}{2} (Y^TWY -\beta^TX^TWY-Y^TWX\beta + \beta^TX^TWX\beta) \\
+			&= \frac{1}{2} (Y^TWY - 2(X\beta)^TWY +\beta^TX^TWX\beta) \\
+			&= \frac{1}{2} Y^TWY - (X\beta)^TWY + \frac{1}{2} \beta^TX^TWX\beta, \label{eqn1}
+		\end{align}
+
+		To minimize the  objective function we take the gradient with respect to $\beta$ and set it equal to zero. 
+		\begin{enumerate}
+			\item % i
+				\begin{align}
+					\nabla_{\beta}( \frac{1}{2} Y^TWY )= 0
+				\end{align}
+			\item % ii
+				\begin{align}
+					\nabla_{\beta} (-(X\beta)^TWY) = - X^TWY
+				\end{align}
+			\item % iii
+				\begin{align}
+					\nabla_{\beta} (\frac{1}{2} \beta^TX^TWX\beta) &= \frac{1}{2} \beta^T (X^TWX + (X^TWX)^T) \\
+					&= X^TWX\beta.
+				\end{align}
+		\end{enumerate}
+		We have to sum all these three terms and set it equal to zero:
+            \begin{align}
+			X^TWX\beta - X^TWY &= 0 \implies
+			 (X^TWX)\hat{\beta} = X^TWY.
+			 \end{align}
+
+
+}
+
+
+
+
+
+
 \item One way to calculate $\hat{\beta}$ is to: (1) recognize that, trivially, the solution to the above linear system must satisfy $\hat \beta = (X^T W X)^{-1} X^T W y$; and (2) to calculate this directly, i.e.~by inverting $X^T W X$.  Let's call this the ``inversion method'' for calculating the WLS solution.
+
 
 Numerically speaking, is the inversion method the fastest and most stable way to actually solve the above linear system?  Do some independent sleuthing on this question.  Summarize what you find, and provide pseudo-code for at least one alternate method based on matrix factorizations---call it ``your method'' for short.  (Note: our linear system is not a special flower; whatever you discover about general linear systems should apply here.)
 
+\bigskip
+{\color{blue}
+solving Eqn. (12) using the inversion method yields:
+		\begin{align}
+			\hat{\beta} = (X^TWX)^{-1}X^TWy.
+		\end{align} 
+		Inverting a matrix in general is a no no! it is very expensive
+		to invert a matrix in general. It is also not a stable method of
+		solving linear systems. One alternate method based on matrix
+		factorization is Cholesky Decomposition.\\
+
+			\textbf{Cholesky Decomposition Method:} \\
+			Let 
+			\begin{align}
+				C = X^TWX, \;\;D=X^TWy
+			\end{align}
+			so 
+			\begin{align}
+				C\hat{\beta} = D.
+			\end{align}
+			We decompose matrix $C$ into a product of a lower-triangular matrix and an upper-triangular matrix, such that $U=L^T$ so
+			\begin{align}
+				C &= LU = LL^T \implies 
+				LL^T\hat{\beta} = D.
+			\end{align}
+			Furthermore we define matrix $A = L^T\hat{\beta}$. Thus we are left with two matrix equations to solve. 
+			\begin{align}
+				LA &= D \\
+				L^T\hat{\beta} &= A
+			\end{align}
+			
+			Here both L and U are triangular and therefore solving these two equations are much less expensive. Therefore, this method 
+			is a much better way of solving the system by taking advantage of the symmetry of the matrix.
+		
+		Cholesky decomposition method:
+			\begin{algorithm}[htp!]
+			 \{ \\
+			 \vspace{2mm}
+			 Compute $D = X^T W y$ \; 
+			 Compute $C = X^T W X$\; 
+			 \vspace{2mm}
+			 Compute $U$ as the upper triangular matrix from Cholesky decomposition of $C$\;
+			 Compute $L = U^T$\; 
+			 \vspace{2mm}
+			 Solve for $A$ in $LA=D$\;
+			 Solve for $\hat{\beta}$ in $L^T\hat{\beta}=U\hat{\beta}=A$\;
+			 \vspace{2mm}
+			 return$(\hat{\beta}$)\; 
+			 \}
+			 \caption{Cholesky Decomposition}
+			\end{algorithm}
+
+
+}
+
+\clearpage
 \item Code up functions that implement both the inversion method and your method for an arbitrary $X$, $y$, and weights $W$.  Obviously you shouldn't write your own linear algebra routines for doing things like multiplying or decomposing matrices, but don't use a direct model-fitting function like R's ``lm'' either.   Your actual code should look a lot like the pseudo-code you wrote for the previous part.  Note: be attentive to how you multiply a matrix by a diagonal matrix, or you'll waste a lot of time multiplying stuff by zero.
 
 Now simulate some silly data from the linear model for a range of values of $N$ and $P$.  (Feel free to assume that the weights $w_i$ are all 1.)  It doesn't matter how you do this---e.g.~everything can be Gaussian if you want.  (We're not concerned with statistical principles yet, just with algorithms, and using least squares is a pretty terrible idea for enormous linear models, anyway.)  Just make sure that you explore values of $P$ up into the thousands, and that $N > P$.  Benchmark the performance of the inversion solver and your solver across a range of scenarios.  (In R, a simple library for this purpose is microbenchmark.)
@@ -113,7 +240,7 @@ We want to estimate $\beta$ by the principle of maximum likelihood.  Note: for b
 
 As an aside, if you have a favorite data set or problem that involves a different GLM---say, a Poisson regression for count data---then feel free to work with that model instead throughout this entire section.  The fact that we're working with a logistic regression isn't essential here; any GLM will do.
 
-\begin{enumerate}[(A)]
+\begin{enumerate}[label=(\Alph*)]
 \item Start by writing out the negative log likelihood,
 $$
 l(\beta) = - \log \left \{ \prod_{i=1}^N p(y_i \mid \beta) \right \} \, .
@@ -126,11 +253,54 @@ w_i(\beta) =  \frac{1}{1 + \exp\{-x_i^T \beta\}}
 $$
 in your expression.
 
+\bigskip
+{\color{blue}
+We have $y_i \sim \text{Binomial}(m_i, w_i)$, where 
+	\begin{align}
+		w_i = \frac{1}{1+\exp(-x_i^T\beta)}, \;\; 1-w_i = \frac{\exp(-x_i^T\beta)}{1+\exp(-x_i^T\beta)},
+	\end{align}
+	so the negative log likelihood is
+	%
+	%
+	%
+	% LOG LIK FN
+	%
+	%
+	%
+	\begin{align}
+		\ell(\beta) &= -\log \left \{ \prod_{i=1}^N p(y_i | \beta)  \right \} \\
+		&= -\log \left \{ \prod_{i=1}^N \binom {m_i}{y_i}(w_i)^{y_i}(1-w_i)^{m_i-y_i}  \right \} \\
+		&= - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} + y_i \log(w_i) + (m_i-y_i)\log(1-w_i) \right ) \right \} \\
+		&= - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} + y_i \log\left ( \frac{1}{1+\exp(-x_i^T\beta)} \right ) + (m_i-y_i)\log\left ( \frac{\exp(-x_i^T\beta)}{1+\exp(-x_i^T\beta)} \right) \right ) \right \} \\
+		& = - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} - y_i\log(1+\exp(-x_i^T\beta)) - (m_i-y_i)x_i^T\beta -m_i\log(1+\exp(-x_i^T\beta)) + y_i\log(1+\exp(-x_i^T\beta)) \right ) \right \} \\
+		& = - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} - (m_i-y_i)x_i^T\beta -m_i\log(1+\exp(-x_i^T\beta)) \right ) \right \} \\
+		& = \sum_{i=1}^{N} \left ((m_i-y_i)x_i^T\beta +m_i\log(1+\exp(-x_i^T\beta)) - \log\binom {m_i}{y_i} \right ) \label{finalll}
+		%%%
+		%%%
+		%%%
+	\end{align}
+	The gradient for this expression is, 
+	%
+	%
+	%
+	% GRAD FN
+	%
+	%
+	%
+	\begin{align}
+		\nabla \ell (\beta) &= \sum_{i=1}^N \left ( (m_i-y_i)x_i - m_i \frac{\exp({-x_i^T\beta})}{1+\exp(-x_i^T\beta)}x_i \right ) \\
+		&= \sum_{i=1}^N \left ( (m_i-y_i)x_i - m_i (1-w_i)x_i \right ) \\
+		&= \sum_{i=1}^N (m_iw_i-y_i)x_i \\
+		&= -X^T(y-mw)
+	\end{align}
+	where $y$ is the $n \times 1$ vector of responses and $mw$ is the element-wise product of the two $n \times 1$ vectors $m$ and $w$.
+
+}
 
 \item Read up on the method of steepest descent, i.e.~gradient descent, in Nocedal and Wright (see course website).  Write your own function that will fit a logistic regression model by gradient descent.  Grab the data ``wdbc.csv'' from the course website, or obtain some other real data that interests you, and test it out.  The WDBC file has information on 569 breast-cancer patients from a study done in Wisconsin.  The first column is a patient ID, the second column is a classification of a breast cell (Malignant or Benign), and the next 30 columns are measurements computed from a digitized image of the cell nucleus.  These are things like radius, smoothness, etc.  For this problem, use the first 10 features for $X$, i.e.~columns 3-12 of the file.  If you use all 30 features you'll run into trouble.
 
 Some notes here:
-\begin{enumerate}[1.]
+\begin{enumerate}
 \item You can handle the intercept/offset term by either adding a column of 1's to the feature matrix $X$, or by explicitly introducing an intercept into the linear predictor and handling the intercept and regression coefficients separately, i.e.
 $$
 w_i(\beta) =  \frac{1}{1 + \exp\{-(\alpha + x_i^T \beta )\}} \, .
