@@ -100,9 +100,10 @@ $$
 $$
 where $W$ is the diagonal matrix of weights.
 
+
 \bigskip
 {\color{blue}
-Rewriting the weighted least squares (WLS) objective function in terms of vectors and matrices, we get
+Let's first write the (WLS) objective function in terms of vectors and matrices:
 		\begin{align}
 			\hat{\beta} &= \argmin_{\beta \in \mathbb{R}^p} \sum_{i=1}^{N} \frac{w_i}{2} \left ( y_i - x_i^T\beta \right )^2 \\
 			&= \argmin_{\beta \in \mathbb{R}^p} \frac{1}{2} (Y-X \beta)^T W (Y-X\beta).
@@ -115,36 +116,30 @@ Rewriting the weighted least squares (WLS) objective function in terms of vector
 			&= \frac{1}{2} (Y^TWY - 2(X\beta)^TWY +\beta^TX^TWX\beta) \\
 			&= \frac{1}{2} Y^TWY - (X\beta)^TWY + \frac{1}{2} \beta^TX^TWX\beta, \label{eqn1}
 		\end{align}
-		because 
-		\begin{align}
-			\beta^TX^TWY = (X\beta)^TWY,
-		\end{align}
-		and
-		\begin{align}
-			Y^TWX\beta &= (Y^TWX\beta)^T \because Y^TWX\beta \in \mathbb{R}^1 \\
-			(Y^TWX\beta)^T &= (WX\beta)^TY = (X\beta)^TW^TY = (X\beta)^TWY.
-		\end{align}
-		We want to minimize the objective function from Eqn. (\ref{eqn1}), so we take the gradient with respect to $\beta$ and set it equal to zero. For each of the three terms, their are respective gradients with respect to $\beta$ are 
-		\begin{enumerate}[(i)]
+
+		To minimize the  objective function we take the gradient with respect to $\beta$ and set it equal to zero. 
+		\begin{enumerate}
 			\item % i
 				\begin{align}
-					\nabla_{\beta} \frac{1}{2} Y^TWY = 0
+					\nabla_{\beta}( \frac{1}{2} Y^TWY )= 0
 				\end{align}
 			\item % ii
 				\begin{align}
-					\nabla_{\beta} -(X\beta)^TWY = - X^TWY
+					\nabla_{\beta} (-(X\beta)^TWY) = - X^TWY
 				\end{align}
 			\item % iii
 				\begin{align}
-					\nabla_{\beta} \frac{1}{2} \beta^TX^TWX\beta &= \frac{1}{2} \beta^T (X^TWX + (X^TWX)^T) \\
+					\nabla_{\beta} (\frac{1}{2} \beta^TX^TWX\beta) &= \frac{1}{2} \beta^T (X^TWX + (X^TWX)^T) \\
 					&= X^TWX\beta.
 				\end{align}
 		\end{enumerate}
-		Summing these terms and setting them to zero yields
-		\begin{align}
-			X^TWX\beta - X^TWY &= 0 \therefore \\
-			 (X^TWX)\hat{\beta} &= X^TWY.
-		\end{align}
+		We have to sum all these three terms and set it equal to zero:
+            \begin{align}
+			X^TWX\beta - X^TWY &= 0 \implies
+			 (X^TWX)\hat{\beta} = X^TWY.
+			 \end{align}
+
+
 }
 
 
