@@ -1,4 +1,3 @@
+## Excercise 01 ##
 
-
-
-> Written with [StackEdit](https://stackedit.io/).
+This directory host all the files related to the first homework.
