@@ -1,4 +1,4 @@
-  \documentclass{mynotes}
+  \documentclass{article}
 
 %\geometry{showframe}% for debugging purposes -- displays the margins
 
@@ -13,7 +13,7 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{graphics/}}
 
-\title[Exercises 1 $\cdot$ SDS 385]{Exercises 1: Preliminaries}
+% \title[Exercises 1 $\cdot$ SDS 385]{Exercises 1: Preliminaries}
 %\author[ ]{ }
 \date{}  % if the \date{} command is left out, the current date will be used
 
@@ -53,7 +53,7 @@
 
 \begin{document}
 
-\maketitle% this prints the handout title, author, and date
+% \maketitle% this prints the handout title, author, and date
 
 \section{Linear regression}
 
@@ -69,7 +69,7 @@ $$
 $$
 where $w_i$ is the weight for observation $i$.  (Higher weight means more influence on the answer; the factor of 1/2 is just for convenience, as you'll see later.)
 
-\begin{enumerate}[(A)]
+\begin{enumerate}
 
 \item Rewrite the WLS objective function\footnote{That is, the thing to be minimized.} above in terms of vectors and matrices, and show that $\hat \beta$ is the solution to the following linear system of $P$ equations in $P$ unknowns:
 $$
@@ -113,7 +113,7 @@ We want to estimate $\beta$ by the principle of maximum likelihood.  Note: for b
 
 As an aside, if you have a favorite data set or problem that involves a different GLM---say, a Poisson regression for count data---then feel free to work with that model instead throughout this entire section.  The fact that we're working with a logistic regression isn't essential here; any GLM will do.
 
-\begin{enumerate}[(A)]
+\begin{enumerate}
 \item Start by writing out the negative log likelihood,
 $$
 l(\beta) = - \log \left \{ \prod_{i=1}^N p(y_i \mid \beta) \right \} \, .
@@ -130,7 +130,7 @@ in your expression.
 \item Read up on the method of steepest descent, i.e.~gradient descent, in Nocedal and Wright (see course website).  Write your own function that will fit a logistic regression model by gradient descent.  Grab the data ``wdbc.csv'' from the course website, or obtain some other real data that interests you, and test it out.  The WDBC file has information on 569 breast-cancer patients from a study done in Wisconsin.  The first column is a patient ID, the second column is a classification of a breast cell (Malignant or Benign), and the next 30 columns are measurements computed from a digitized image of the cell nucleus.  These are things like radius, smoothness, etc.  For this problem, use the first 10 features for $X$, i.e.~columns 3-12 of the file.  If you use all 30 features you'll run into trouble.
 
 Some notes here:
-\begin{enumerate}[1.]
+\begin{enumerate}
 \item You can handle the intercept/offset term by either adding a column of 1's to the feature matrix $X$, or by explicitly introducing an intercept into the linear predictor and handling the intercept and regression coefficients separately, i.e.
 $$
 w_i(\beta) =  \frac{1}{1 + \exp\{-(\alpha + x_i^T \beta )\}} \, .
