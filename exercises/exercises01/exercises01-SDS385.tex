@@ -318,6 +318,49 @@ q(\beta; \beta_0) = \frac{1}{2}(z - X \beta)^T W (z - X \beta) + c\, ,
 $$
 where $z$ is a vector of ``working responses'' and $W$ is a diagonal matrix of ``working weights,'' and $c$ is a constant that doesn't involve $\beta$.  Give explicit expressions for the diagonal elements $W_{ii}$ and for $z_i$ (which will necessarily involve the point $\beta_0$, around which you're doing the expansion).\footnote{Remember the trick of completing the square, e.g.~\url{https://justindomke.wordpress.com/completing-the-square-in-n-dimensions/}.}
 
+{\color{blue}
+We need to calculate the Hessian matrix of the log likelihood function, $\nabla^2 \ell(\beta) $. The Hessian will be a $P\times P$ matrix, with the element in row $i$ and column $j$ being:
+	\begin{align}
+		\frac{\partial^2}{\partial \beta_i \partial \beta _j}\ell (\beta) &= \frac{\partial}{\partial \beta_i} \left ( \frac{\partial}{\partial \beta_j} \ell (\beta) \right ) \\
+		&= \frac{\partial}{\partial \beta_i} \left ( \frac{\partial}{\partial \beta_j} \sum_{k=1}^N \left [(m_k-y_k)x_i^T\beta +m_k\log(1+\exp(-x_k^T\beta)) - \log\binom {m_k}{y_k} \right ] \right ) \\
+		&= \frac{\partial}{\partial \beta_i} \left ( \nabla_j \ell(\beta) \right ) \\
+		&= \frac{\partial}{\partial \beta_i} \left ( \sum_{k=1}^N(m_kw_k-y_k)x_{kj} \right )  \\
+		&= \sum_{k=1}^{N} x_{ki}x_{kj}m_k w_k(1-w_k)
+	\end{align}
+	Note: 
+	\begin{align}
+		\frac{\partial}{\partial \beta_i} w_k &= x_{ki} \frac{\exp(-x_k^T\beta)}{(1+\exp(-x_k^T\beta))^2} \\
+		&= x_{ki} w_k(1-w_k)
+	\end{align}
+	This matrix is equivalent to $X^TWX$ where $W = \text{diag}(m_1w_1(1-w_1),\ldots, m_Nw_N(1-w_N))$ \\
+	
+	Let $a = (y-mw)$. We have already shown that $\nabla \ell(\beta) = -X^T (y-mw) = -X^T a$ and $\nabla^2 \ell (\beta) = X^T W X$. The second-order Taylor approximation for $\ell(\beta)$ around the point $\beta_0$ is,\footnote{Help with completing the square obtained from: \texttt{https://justindomke.wordpress.com/completing-the-square-in-n-dimensions/}}
+	%
+	%
+	%
+	% Taylor approx
+	%
+	%
+	%
+	\begin{align}
+		\hat{\ell}(\beta) &= \ell(\beta_0)+(\nabla \ell(\beta))^T(\beta-\beta_0) + \frac{1}{2}(\beta-\beta_0)^T \nabla^2 \ell(\beta) (\beta-\beta_0) \\
+		&= \ell(\beta_0) + (-X^T a)^T(\beta - \beta_0) + \frac{1}{2}(\beta - \beta_0)^T X^T W X (\beta - \beta_0) \\
+		&= \frac{1}{2} ( [ \beta - \beta_0 ] -(X^T W X)^{-1} X^T a )^T X^T W X ( [ \beta - \beta_0 ] -(X^T W X)^{-1} X^T a ) + c \\ 
+		&= \frac{1}{2} (\beta - \beta_0  + X^{-1}W^{-1}(X^T)^{-1}X^T a )^T X^T W X (\beta - \beta_0 + X^{-1}W^{-1}(X^T)^{-1}X^T a ) + c \\
+		&= \frac{1}{2} (\beta - \beta_0 + X^{-1}W^{-1} a )^T X^T W X (\beta - \beta_0 X^{-1}W^{-1} a ) + c \\
+		&= \frac{1}{2} (X\beta - X\beta_0 + XX^{-1}W^{-1} a )^T W (X\beta - X\beta_0 + X X^{-1}W^{-1} a ) + c \\
+		&= \frac{1}{2} (X\beta - X\beta_0 + W^{-1} a )^T W (X\beta - X\beta_0 + W^{-1} a ) + \ldots \\
+		&= \frac{1}{2}(z-X\beta)^T W (z-X\beta) + c,
+	\end{align}
+	where $c$ is some constant, $z = X\beta_0 + W^{-1}a = X\beta_0 + W^{-1}(y-mw)$
+%%
+%%
+%%
+%%
+%%
+}
+
+
 \item Read up on Newton's method in Nocedal and Wright, Chapter 2.  Implement it for the logit model and test it out on the same data set you just used to test out gradient descent.\footnote{You should be able to use your own solver for linear systems from the first section.}  Note: while you could do line search, there is a ``natural'' step size of 1 in Newton's method.
 
 \item Reflect broadly on the tradeoffs inherent in the decision of whether to use gradient descent or Newton's method for solving a logistic-regression problem.
