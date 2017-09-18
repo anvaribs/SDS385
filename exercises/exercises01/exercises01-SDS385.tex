@@ -272,7 +272,7 @@ We have $y_i \sim \text{Binomial}(m_i, w_i)$, where
 		&= -\log \left \{ \prod_{i=1}^N \binom {m_i}{y_i}(w_i)^{y_i}(1-w_i)^{m_i-y_i}  \right \} \\
 		&= - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} + y_i \log(w_i) + (m_i-y_i)\log(1-w_i) \right ) \right \} \\
 		&= - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} + y_i \log\left ( \frac{1}{1+\exp(-x_i^T\beta)} \right ) + (m_i-y_i)\log\left ( \frac{\exp(-x_i^T\beta)}{1+\exp(-x_i^T\beta)} \right) \right ) \right \} \\
-		& = - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} - y_i\log(1+\exp(-x_i^T\beta)) - (m_i-y_i)x_i^T\beta -m_i\log(1+\exp(-x_i^T\beta)) + y_i\log(1+\exp(-x_i^T\beta)) \right ) \right \} \\
+		& = - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} - y_i\log(1+\exp(-x_i^T\beta)) - (m_i-y_i)x_i^T\beta \\& -m_i\log(1+\exp(-x_i^T\beta)) + y_i\log(1+\exp(-x_i^T\beta)) \right ) \right \} \\
 		& = - \left \{ \sum_{i=1}^{N} \left ( \log\binom {m_i}{y_i} - (m_i-y_i)x_i^T\beta -m_i\log(1+\exp(-x_i^T\beta)) \right ) \right \} \\
 		& = \sum_{i=1}^{N} \left ((m_i-y_i)x_i^T\beta +m_i\log(1+\exp(-x_i^T\beta)) - \log\binom {m_i}{y_i} \right ) \label{finalll}
 		%%%
