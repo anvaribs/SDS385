@@ -363,6 +363,7 @@ We need to calculate the Hessian matrix of the log likelihood function, $\nabla^
 
 \item Read up on Newton's method in Nocedal and Wright, Chapter 2.  Implement it for the logit model and test it out on the same data set you just used to test out gradient descent.\footnote{You should be able to use your own solver for linear systems from the first section.}  Note: while you could do line search, there is a ``natural'' step size of 1 in Newton's method.
 
+{\color{blue}
 
 Now we use Newton's to estimate $\beta$. This is also an iterative process, though now we need far fewer iterations to achieve convergence because we are taking the curvature of our objective function ($\ell(\beta)$) into account. In fact, we only use 10 iterations and achieve estimates $\hat{\beta}$ which are \emph{exactly} in line with estimates from \texttt{glm}. \\
 \textbf{Newton's Method:} 
@@ -409,11 +410,20 @@ Now we use Newton's to estimate $\beta$. This is also an iterative process, thou
 %%
 %%
 %%
+}
 
 
 \pagebreak
 \item Reflect broadly on the tradeoffs inherent in the decision of whether to use gradient descent or Newton's method for solving a logistic-regression problem.
 
+{\color{blue}
+Gradient descent requires many iterations, and there is no simple way to know what step size is wise, or even to know just how many iterations are sufficient to reach convergence. The only way to find out is to experiment with different numbers of iterations and step sizes. In contrast, Newton's method converges upon the MLE with far fewer iterations because we are using knowledge of the ``curvature" of our function to be minimized. However, for Newton's method we must invert the Hessian matrix, which is computationally intensive for large matrices, and potentially unstable, leaving us vulnerable to floating point errors. It also possible that the Hessian matrix has no closed form solution or is so convoluted as to make its computation difficult.
+%%
+%%
+%%
+%%
+%%
+}
 
 
 
