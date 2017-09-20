@@ -106,26 +106,26 @@ where $W$ is the diagonal matrix of weights.
 Let's first write the (WLS) objective function in terms of vectors and matrices:
 		\begin{align}
 			\hat{\beta} &= \argmin_{\beta \in \mathbb{R}^p} \sum_{i=1}^{N} \frac{w_i}{2} \left ( y_i - x_i^T\beta \right )^2 \\
-			&= \argmin_{\beta \in \mathbb{R}^p} \frac{1}{2} (Y-X \beta)^T W (Y-X\beta).
+			&= \argmin_{\beta \in \mathbb{R}^p} \frac{1}{2} (y-X \beta)^T W (y-X\beta).
 		\end{align}
-		Expanding the term in the objective function yielda
+		We can then expand this equation:
 		\begin{align}
-			\frac{1}{2} (Y-X \beta)^T W (Y-X\beta) &= \frac{1}{2} (Y^T - \beta^T X^T)W(Y-X\beta) \\
-			&= \frac{1}{2} (Y^TW - \beta^T X^TW)(Y-X\beta) \\
-			&= \frac{1}{2} (Y^TWY -\beta^TX^TWY-Y^TWX\beta + \beta^TX^TWX\beta) \\
-			&= \frac{1}{2} (Y^TWY - 2(X\beta)^TWY +\beta^TX^TWX\beta) \\
-			&= \frac{1}{2} Y^TWY - (X\beta)^TWY + \frac{1}{2} \beta^TX^TWX\beta, \label{eqn1}
+			\frac{1}{2} (y-X \beta)^T W (y-X\beta) &= \frac{1}{2} (y^T - \beta^T X^T)W(y-X\beta) \\
+			&= \frac{1}{2} (y^TW - \beta^T X^TW)(y-X\beta) \\
+			&= \frac{1}{2} (y^TWy -\beta^TX^TWy-y^TWX\beta + \beta^TX^TWX\beta) \\
+			&= \frac{1}{2} (y^TWy - 2(X\beta)^TWy +\beta^TX^TWX\beta) \\
+			&= \frac{1}{2} y^TWy - (X\beta)^TWy + \frac{1}{2} \beta^TX^TWX\beta, \label{eqn1}
 		\end{align}
 
 		To minimize the  objective function we take the gradient with respect to $\beta$ and set it equal to zero. 
 		\begin{enumerate}
 			\item % i
 				\begin{align}
-					\nabla_{\beta}( \frac{1}{2} Y^TWY )= 0
+					\nabla_{\beta}( \frac{1}{2} y^TWy )= 0
 				\end{align}
 			\item % ii
 				\begin{align}
-					\nabla_{\beta} (-(X\beta)^TWY) = - X^TWY
+					\nabla_{\beta} (-(X\beta)^TWy) = - X^TWy
 				\end{align}
 			\item % iii
 				\begin{align}
@@ -135,8 +135,8 @@ Let's first write the (WLS) objective function in terms of vectors and matrices:
 		\end{enumerate}
 		We have to sum all these three terms and set it equal to zero:
             \begin{align}
-			X^TWX\beta - X^TWY &= 0 \implies
-			 (X^TWX)\hat{\beta} = X^TWY.
+			X^TWX\beta - X^TWy &= 0 \implies
+			 (X^TWX)\hat{\beta} = X^TWy.
 			 \end{align}
 
 
