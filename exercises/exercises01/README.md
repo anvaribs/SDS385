@@ -17,4 +17,4 @@ I will add all the related details to this document. However, all the solutions 
  
  Feel free to skip the stuff about trust-region methods.  The overview of quasi-Newton methods is nice, but optional   for now.
  
- The [exercises for this unit](exercises01-SDS385.pdf) will have you practice these techniques.  They      will also will hammer your linear algebra skills.
+ The [exercises for this unit](exercises01-SDS385.pdf) will have you practice these techniques.  They also will hammer your linear algebra skills.
