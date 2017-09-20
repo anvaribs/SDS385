@@ -212,11 +212,12 @@ solving Eqn. (12) using the inversion method yields:
 
 Now simulate some silly data from the linear model for a range of values of $N$ and $P$.  (Feel free to assume that the weights $w_i$ are all 1.)  It doesn't matter how you do this---e.g.~everything can be Gaussian if you want.  (We're not concerned with statistical principles yet, just with algorithms, and using least squares is a pretty terrible idea for enormous linear models, anyway.)  Just make sure that you explore values of $P$ up into the thousands, and that $N > P$.  Benchmark the performance of the inversion solver and your solver across a range of scenarios.  (In R, a simple library for this purpose is microbenchmark.)
 
-
+\bigskip
 {\color{blue}
 See the attached notebook (exercises01-WLS.ipynb)
 }
 
+\bigskip
 \item Now what happens if $X$ is a highly sparse matrix, in the sense that most entries are zero?  Ideally we'd realize some savings by not doing a whole bunch of needless multiplication by zero in our code.
 
 It's easy to simulate an $X$ matrix that looks like this.  A quick-and-dirty way is to simulate a mask of zeros and ones (but mostly zeros), and then do pointwise multiplication with your original feature matrix.  For example:
@@ -231,7 +232,9 @@ X[1:10, 1:10]  # quick visual check
 
 Again assume that the weights $w_i$ are all 1.  Repeat the previous benchmarking exercise with this new recipe for simulating a sparse $X$, except add another solver to the mix: one that can solve a linear system $Ax = b$ in a way that exploits the sparsity of A.  To do this, you'll need to actually represent the feature matrix $X$ in a sparse format, and then call the appropriate routines  for that format.  (Again, do some sleuthing; in R, the Matrix library has data structures and functions that can do this; SciPy will have an equivalent.)
 
-Benchmark the inversion method, your method, and the sparse method across some different scenarios (including different sparsity levels in $X$, e.g. 5\% dense in my code above).\\
+Benchmark the inversion method, your method, and the sparse method across some different scenarios (including different sparsity levels in $X$, e.g. 5\% dense in my code above).
+
+\bigskip
 {\color{blue}
 See the attached notebook (exercises01-WLS.ipynb)
 }
@@ -240,7 +243,7 @@ See the attached notebook (exercises01-WLS.ipynb)
 
 
 
-
+\clearpage
 \section{Generalized linear models}
 
 As an archetypal case of a GLM, we'll consider the binomial logistic regression model: $y_i \sim \mbox{Binomial}(m_i, w_i)$, where $y_i$ in an integer number of ``successes,'' $m_i$ is the number of trials for the $i$th case, and the success probability $w_i$ is a regression on a feature vector $x_i$ given by the inverse logit transform:
@@ -290,7 +293,7 @@ We have $y_i \sim \text{Binomial}(m_i, w_i)$, where
 		%%%
 		%%%
 	\end{align}
-	The gradient for this expression is, 
+	Now, let's calculate the gradient:, 
 	%
 	%
 	%
@@ -304,7 +307,6 @@ We have $y_i \sim \text{Binomial}(m_i, w_i)$, where
 		&= \sum_{i=1}^N (m_iw_i-y_i)x_i \\
 		&= -X^T(y-mw)
 	\end{align}
-	where $y$ is the $n \times 1$ vector of responses and $mw$ is the element-wise product of the two $n \times 1$ vectors $m$ and $w$.
 
 }
 
