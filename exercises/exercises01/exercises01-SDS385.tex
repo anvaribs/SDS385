@@ -209,7 +209,13 @@ solving Eqn. (12) using the inversion method yields:
 \clearpage
 \item Code up functions that implement both the inversion method and your method for an arbitrary $X$, $y$, and weights $W$.  Obviously you shouldn't write your own linear algebra routines for doing things like multiplying or decomposing matrices, but don't use a direct model-fitting function like R's ``lm'' either.   Your actual code should look a lot like the pseudo-code you wrote for the previous part.  Note: be attentive to how you multiply a matrix by a diagonal matrix, or you'll waste a lot of time multiplying stuff by zero.
 
+
 Now simulate some silly data from the linear model for a range of values of $N$ and $P$.  (Feel free to assume that the weights $w_i$ are all 1.)  It doesn't matter how you do this---e.g.~everything can be Gaussian if you want.  (We're not concerned with statistical principles yet, just with algorithms, and using least squares is a pretty terrible idea for enormous linear models, anyway.)  Just make sure that you explore values of $P$ up into the thousands, and that $N > P$.  Benchmark the performance of the inversion solver and your solver across a range of scenarios.  (In R, a simple library for this purpose is microbenchmark.)
+
+
+{\color{blue}
+See the attached notebook (exercises01-WLS.ipynb)
+}
 
 \item Now what happens if $X$ is a highly sparse matrix, in the sense that most entries are zero?  Ideally we'd realize some savings by not doing a whole bunch of needless multiplication by zero in our code.
 
@@ -225,8 +231,14 @@ X[1:10, 1:10]  # quick visual check
 
 Again assume that the weights $w_i$ are all 1.  Repeat the previous benchmarking exercise with this new recipe for simulating a sparse $X$, except add another solver to the mix: one that can solve a linear system $Ax = b$ in a way that exploits the sparsity of A.  To do this, you'll need to actually represent the feature matrix $X$ in a sparse format, and then call the appropriate routines  for that format.  (Again, do some sleuthing; in R, the Matrix library has data structures and functions that can do this; SciPy will have an equivalent.)
 
-Benchmark the inversion method, your method, and the sparse method across some different scenarios (including different sparsity levels in $X$, e.g. 5\% dense in my code above).
+Benchmark the inversion method, your method, and the sparse method across some different scenarios (including different sparsity levels in $X$, e.g. 5\% dense in my code above).\\
+{\color{blue}
+See the attached notebook (exercises01-WLS.ipynb)
+}
+
 \end{enumerate}
+
+
 
 
 \section{Generalized linear models}
