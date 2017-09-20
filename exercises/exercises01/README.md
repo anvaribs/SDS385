@@ -10,6 +10,8 @@ I will add all the related details to this document. However, all the solutions 
 
 **Note2:** For Question1: part C & D, refer to the iPython notebook [exercises01-WLS](src/exercises01-WLS.ipynb).
 
+**Note2:** For Question2: Part B & D, refer to the ipython notebook [exercises01-GLM](src/exercises01-GLM.ipynb).
+
 
 
  ## Exercises 1: Preliminaries
