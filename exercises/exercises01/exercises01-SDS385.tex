@@ -160,8 +160,7 @@ solving Eqn. (12) using the inversion method yields:
 		\end{align} 
 		Inverting a matrix in general is a no no! it is very expensive
 		to invert a matrix in general. It is also not a stable method of
-		solving linear systems. One alternate method based on matrix
-		factorization is Cholesky Decomposition.\\
+		solving linear systems. Cholesky factorization, QR factorization, and singular value decomposition are three alternative way that we can solve the WLS equation. Here we discuss Cholesky Decomposition to solve WLS.\\
 
 			\textbf{Cholesky Decomposition Method:} \\
 			Let 
@@ -172,22 +171,22 @@ solving Eqn. (12) using the inversion method yields:
 			\begin{align}
 				C\hat{\beta} = D.
 			\end{align}
-			We decompose matrix $C$ into a product of a lower-triangular matrix and an upper-triangular matrix, such that $U=L^T$ so
+			Matrix $C$ can be decomposed into a lower-triangular matrix and an upper-triangular matrix, such that $U=L^T$ so
 			\begin{align}
 				C &= LU = LL^T \implies 
 				LL^T\hat{\beta} = D.
 			\end{align}
-			Furthermore we define matrix $A = L^T\hat{\beta}$. Thus we are left with two matrix equations to solve. 
+			Let's define matrix $M = L^T\hat{\beta}$. The problem changed into solving two much simpler problems. 
 			\begin{align}
-				LA &= D \\
-				L^T\hat{\beta} &= A
+				LM &= D \\
+				L^T\hat{\beta} &= M
 			\end{align}
 			
 			Here both L and U are triangular and therefore solving these two equations are much less expensive. Therefore, this method 
 			is a much better way of solving the system by taking advantage of the symmetry of the matrix.
 		
-		Cholesky decomposition method:
-			\begin{algorithm}[htp!]
+		Cholesky decomposition method:\\
+			\begin{algorithm}[H]
 			 \{ \\
 			 \vspace{2mm}
 			 Compute $D = X^T W y$ \; 
@@ -196,12 +195,12 @@ solving Eqn. (12) using the inversion method yields:
 			 Compute $U$ as the upper triangular matrix from Cholesky decomposition of $C$\;
 			 Compute $L = U^T$\; 
 			 \vspace{2mm}
-			 Solve for $A$ in $LA=D$\;
-			 Solve for $\hat{\beta}$ in $L^T\hat{\beta}=U\hat{\beta}=A$\;
+			 Solve for $M$ in $LM=D$\;
+			 Solve for $\hat{\beta}$ in $L^T\hat{\beta}=U\hat{\beta}=M$\;
 			 \vspace{2mm}
 			 return$(\hat{\beta}$)\; 
 			 \}
-			 \caption{Cholesky Decomposition}
+			 \caption{Cholesky Decomposition Algorithms}
 			\end{algorithm}
 
 
