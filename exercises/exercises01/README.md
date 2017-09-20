@@ -6,6 +6,11 @@ I will add all the related details to this document. However, all the solutions 
 * [exercises01-SDS385.tex](exercises01-SDS385.tex)
 * [exercises01-solutions.pdf](exercises01-solutions.pdf)
 
+**Note1:**  In this exercise, I am going to use the [wdbc.csv](https://github.com/anvaribs/SDS385/tree/master/data/wdbc.csv) dataset. 
+
+**Note2:** For Question1: part C & D, refer to the iPython notebook [exercises01-WLS](src/exercises01-WLS.ipynb).
+
+
 
  ## Exercises 1: Preliminaries
  
@@ -17,4 +22,4 @@ I will add all the related details to this document. However, all the solutions 
  
  Feel free to skip the stuff about trust-region methods.  The overview of quasi-Newton methods is nice, but optional   for now.
  
- The [exercises for this unit](exercises01/exercises01-SDS385.pdf) will have you practice these techniques.  They      will also will hammer your linear algebra skills.
+ The [exercises for this unit](exercises01-SDS385.pdf) will have you practice these techniques.  They also will hammer your linear algebra skills.
