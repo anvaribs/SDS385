@@ -8,7 +8,7 @@ I will add all the related details to this document. However, all the solutions 
 
 **Note1:**  In this exercise, I am going to use the [wdbc.csv](https://github.com/anvaribs/SDS385/tree/master/data/wdbc.csv) dataset. 
 
-**Note2:** For Question1: part C & D, refer to the iPython notebook [exercises01-WLS](exercises01-WLS.ipynb).
+**Note2:** For Question1: part C & D, refer to the iPython notebook [exercises01-WLS](src/exercises01-WLS.ipynb).
 
 
 
