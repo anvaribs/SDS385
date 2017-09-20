@@ -6,6 +6,9 @@ I will add all the related details to this document. However, all the solutions 
 * [exercises01-SDS385.tex](exercises01-SDS385.tex)
 * [exercises01-solutions.pdf](exercises01-solutions.pdf)
 
+* Note1: In this exercise, I am going to use the [wdbc.csv](https://github.com/anvaribs/SDS385/tree/master/data/wdbc.csv) dataset. 
+
+
 
  ## Exercises 1: Preliminaries
  
