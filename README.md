@@ -8,7 +8,7 @@ Welcome to SDS 385, a Ph.D.-level course on statistical models for big data.  Al
 Some course logistics   
 - Instructor: James Scott, <http://jgscott.github.com>  
 - Meets: Mondays and Wednesday, 9:30 - 11:00 AM
-- Classroom: PHR 2.116
+- Classroom: GDC 7.402
 - Unique number: 57075  
 
 
