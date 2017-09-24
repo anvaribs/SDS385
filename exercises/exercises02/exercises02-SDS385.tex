@@ -1,28 +1,56 @@
-  \documentclass{mynotes}
+  \documentclass{article}
 
 %\geometry{showframe}% for debugging purposes -- displays the margins
 
+
+% This is to make the sections not to include numbers
+\makeatletter
+\def\@seccntformat#1{%
+  \expandafter\ifx\csname c@#1\endcsname\c@section\else
+  \csname the#1\endcsname\quad
+  \fi}
+\makeatother
+
 \newcommand{\E}{\mbox{E}}
 
+\usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+%\usepackage{couriernew} % Required for the courier font
+\usepackage{amssymb}
+\usepackage{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage[thinlines]{easytable}
+% \usepackage[letterpaper, landscape, margin=2in]{geometry}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
+
 %\usepackage[garamond]{mathdesign}
+\usepackage{url}
 
 % Set up the images/graphics package
 \usepackage{graphicx}
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{graphics/}}
 
-\title[Exercises 2 $\cdot$ SDS 385]{Exercises 2: Online learning}
+
+\title{Amin Anvari}
+\date{}
+\author{SDS 385D - Statistical Models for Big Data\\ Assignment 2}
+
+% \title[Exercises 1 $\cdot$ SDS 385]{Exercises 1: Preliminaries}
 %\author[ ]{ }
 \date{}  % if the \date{} command is left out, the current date will be used
 
 % The following package makes prettier tables.  We're all about the bling!
 \usepackage{booktabs}
-
-
-  \hypersetup{%
-    colorlinks=TRUE
-  }
 
 % The units package provides nice, non-stacked fractions and better spacing
 % for units.
@@ -55,6 +83,7 @@
 \newcommand{\betahat}{\hat{\beta}}
 
 
+
 \begin{document}
 
 \maketitle% this prints the handout title, author, and date
@@ -84,10 +113,11 @@ So assuming you handle the step sizes properly---a big if, as we'll see---here a
 
 The answers are: 1) pretty darn random, and 2) so that we only ever have to touch one data point at a time!  Let's explore.
 
+\newpage
 \section{SGD for logistic regression}
 
 
-\begin{enumerate}[(A)]
+\begin{enumerate}[label=(\Alph*)]
 
 \item Let $l(\beta)$ be the negative log likelihood associated with the logistic regression model, which was a sum over $n$ terms (one term for each data point).  Earlier you derived the gradient of $l(\beta)$.  If you haven't already, show that this gradient can be written in the form
 $$
@@ -115,7 +145,7 @@ $$
 where $g_t (\beta)$ is the gradient contribution from single randomly sampled data point, evaluated at the current guess for $\beta$.
 
 Some notes:
-\begin{enumerate}[1.]
+\begin{enumerate}[label=\arabic*.]
 \item Focus on functionality first.  Forget about speed for now.  It's said in CS that premature optimization is the root of all evil.  Don't worry: soon enough, you'll have an SGD implementation that will blaze.
 \item You'll almost certainly want to try this on simulated data first, so you can compare the answer you get both with the ground truth and with the answer you get from something like Newton's method.  Simply plotting truth versus SGD estimate, or Newton estimate versus SGD estimate, will be informative.
 \item For this part,  keep the step size constant over time: that is, $\gamma^{(t)} \equiv \gamma$.  You'll want to start your debugging process with $\gamma$ pretty small.  (For perspective, $\gamma = 1$ is considered a big step size).  A good step size will depend very much on your data, but if things are going crazy, go an order of magnitude smaller, i.e.~from 0.1 to 0.01 or even smaller.  This doesn't have to be elegantly handled in your code (i.e.~you can hard-code it), because you won't be using a constant step size going forward---it's just for intuition-building here.
@@ -125,14 +155,14 @@ Some notes:
 
 
 You'll also want to track the convergence of the algorithm.  Some notes on this point as you think through your options:
-\begin{enumerate}[1.]
+\begin{enumerate}[label=\arabic*.]
 \item The surefire way to do this is to track the value of the full objective function $l(\beta)$ at every step, so you can plot it over time and check whether it's actually going down.
 \item Of course, if you do this, you'll defeat the purpose of touching only one data point at every iteration.  You'll probably want to do it anyway for now, as you build intuition and debug code.  But you should also consider tracking something that doesn't suffer from this problem: the running average of $l_t(\beta)$, the individual log likelihood contribution from the data point you sample at step $t$.  Although.~.~.~.
 \item Really, if you want to be even more clever than this, you can track the \href{https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average}{exponentially weighted moving average} of the $l_t(\beta)$'s, so that the influence of the early (bad) log-likelihood evaluations decays over time.
 \end{enumerate}
 
 
-\item Now try a decaying step size.  Specifically, use the \href{https://en.wikipedia.org/wiki/Stochastic_approximation}{Robbins--Monro} rule for step sizes:
+\item Now try a decaying step size.  Specifically, use the \href{https://en.wikipedia.org/wiki/Stochastic_approximation} {Robbins--Monro} rule for step sizes:
 $$
 \gamma^{(t)} = C (t + t_0)^{-\alpha} \, ,
 $$
