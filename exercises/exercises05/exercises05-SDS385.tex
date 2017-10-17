@@ -43,7 +43,7 @@
 
 \title{Amin Anvari}
 \date{}
-\author{SDS 385D - Statistical Models for Big Data\\ Assignment 5: Sparsity}
+\author{SDS 385D - Statistical Models for Big Data\\ Assignment 5: \textbf{Sparsity}}
 
 % \title[Exercises 1 $\cdot$ SDS 385]{Exercises 1: Preliminaries}
 %\author[ ]{ }
@@ -101,7 +101,7 @@ These viewpoints all have their advantages and disadvantages.  One the major adv
 \section{Penalized likelihood and soft thresholding}
 
 
-\begin{enumerate}[(A)]
+\begin{enumerate}[label=(\Alph*)]
 \item Define the function
 \begin{equation}
 \label{eqn:soft_thresholding}
@@ -113,7 +113,7 @@ First show (in a trivial one- or two-liner) that the quadratic term in the objec
 $$
 S_\lambda(y) = \mbox{sign}(y) \cdot (|y| - \lambda)_+ \, ,
 $$
-where $a_+ = \max(a,0)$ is the positive part of $a$.  This is a basic exercise in \href{http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-253-convex-analysis-and-optimization-spring-2012/lecture-notes/MIT6_253S12_lec12.pdf}{subdifferential calculus}, if you happen to know this subject.  But I am not assuming that you do, and you can also prove the statement using ordinary differential calculus if you split it up into cases ($\theta>0$, $\theta<0$, and $\theta=0$).\footnote[][-5pc]{If you know about constrained optimization, you could also introduce a slack variable $z$ and write the objective as
+where $a_+ = \max(a,0)$ is the positive part of $a$.  This is a basic exercise in \href{http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-253-convex-analysis-and-optimization-spring-2012/lecture-notes/MIT6_253S12_lec12.pdf}{subdifferential calculus}, if you happen to know this subject.  But I am not assuming that you do, and you can also prove the statement using ordinary differential calculus if you split it up into cases ($\theta>0$, $\theta<0$, and $\theta=0$).\footnote{If you know about constrained optimization, you could also introduce a slack variable $z$ and write the objective as
 $$
 \frac{1}{2}(y - \theta)^2 + \lambda | z | \, ,
 $$
@@ -146,7 +146,7 @@ $$
 where $S$ is the soft thresholding operator defined above with parameter $\lambda \sigma_i$.  (Side question: why $\lambda \sigma_i^2$ for the soft-thresholding parameter?)
 
 Try the following intuition-building exercise.
-\begin{enumerate}[1.]
+\begin{enumerate}[label=\arabic*.]
 \item Choose some sparse vector $\theta$ and the corresponding $\sigma_i^2$'s (it's OK for them all to be equal).  You have freedom in deciding what the nonzero elements of $\theta$ should be, and how sparse it should be.  (Ideally there would be some tunable parameter that you could use to ratchet up or down the sparsity level.)
 \item Simulate one data point $(z_i \mid \theta_i) \sim N(\theta_i, \sigma^2_i)$ for each $\theta_i$.
 \item Compute $\widehat{\theta}(y_i) = S_{\lambda \sigma_i^2}(y_i)$ across a discrete grid of different $\lambda$ values.  Plot $\widehat{\theta}(y_i)$ versus $\theta_i$, and observe how the soft-thresholding function both \emph{selects} certain $\theta_i$'s by sparsifying the estimate, as well as \emph{shrinks} the nonzero estimates $\widehat{\theta}(y_i)$ towards 0 (and towards each other).
@@ -196,7 +196,7 @@ where $\alpha$ is a scalar intercept and $\mathbf{1}$ is a vector of all 1's.  O
 
 To read more about lasso regression, consult Chapter 3.4.2 of \textit{The Elements of Statistical Learning}, or the \href{http://statweb.stanford.edu/~tibs/lasso/lasso.pdf}{original paper} by Robert Tibshirani.
 
-\begin{enumerate}[(A)]
+\begin{enumerate}[label=(\Alph*)]
 
 \item For now, we won't worry about \textit{how} the lasso model is fit.  Instead, we'll use pre-existing software to fit it:
 \begin{description}
