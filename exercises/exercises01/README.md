@@ -1,4 +1,4 @@
-## Excercises 1 ##
+## Exercises 1 ##
 
 This directory hosts all the files related to the first homework.
 
