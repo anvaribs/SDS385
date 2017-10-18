@@ -6,7 +6,7 @@ I will add all the related details to this document. Howver, all the solutions w
 * [exercises05-solutions.pdf](exercises05-solutions.pdf)
 
 
-**Note1:**  In this exercise, I am going to use the [wdbc.csv](https://github.com/anvaribs/SDS385/tree/master/data/wdbc.csv) dataset. I am also going to use some other datasets to test my implementation. I will add all those datasets to this repo. 
+**Note1:**  In this exercise, I am going to use the [diabetesX.csv](https://github.com/anvaribs/SDS385/tree/master/data/diabetesX.csv), [diabetesY.csv]((https://github.com/anvaribs/SDS385/tree/master/data/diabetesY.csv) dataset. I am also going to use some other datasets to test my implementation. I will add all those datasets to this repo. 
 
 **Note2:** Please refer to the iPython notebook for the implementations: [stochastic_gradient_descent.ipynb](src/stochastic_gradient_descent.ipynb).
 
