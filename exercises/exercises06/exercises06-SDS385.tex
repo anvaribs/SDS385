@@ -1,32 +1,56 @@
-  \documentclass{mynotes}
+\documentclass{article}
 
 %\geometry{showframe}% for debugging purposes -- displays the margins
 
+
+% This is to make the sections not to include numbers
+\makeatletter
+\def\@seccntformat#1{%
+  \expandafter\ifx\csname c@#1\endcsname\c@section\else
+  \csname the#1\endcsname\quad
+  \fi}
+\makeatother
+
 \newcommand{\E}{\mbox{E}}
-\newcommand{\prox}{ \mathop{\mathrm{prox}} }
-\newcommand{\enorm}[1]{\Vert #1 \Vert_2}
 
-
-
+\usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+%\usepackage{couriernew} % Required for the courier font
+\usepackage{amssymb}
+\usepackage{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage[thinlines]{easytable}
+% \usepackage[letterpaper, landscape, margin=2in]{geometry}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
+
 %\usepackage[garamond]{mathdesign}
+\usepackage{url}
 
 % Set up the images/graphics package
 \usepackage{graphicx}
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{graphics/}}
 
-\title[Exercises 6 $\cdot$ SDS 385]{Exercises 6: The proximal gradient method}
+
+\title{Amin Anvari}
+\date{}
+\author{SDS 385D - Statistical Models for Big Data\\ Assignment 6: \textbf{The proximal gradient method}}
+
+% \title[Exercises 1 $\cdot$ SDS 385]{Exercises 1: Preliminaries}
 %\author[ ]{ }
 \date{}  % if the \date{} command is left out, the current date will be used
 
 % The following package makes prettier tables.  We're all about the bling!
 \usepackage{booktabs}
-
-
-  \hypersetup{%
-    colorlinks=TRUE
-  }
 
 % The units package provides nice, non-stacked fractions and better spacing
 % for units.
@@ -57,7 +81,6 @@
 \newcommand{\thetahat}{\hat{\theta}}
 \newcommand{\sigmahat}{\hat{\sigma}}
 \newcommand{\betahat}{\hat{\beta}}
-
 
 \begin{document}
 
@@ -90,7 +113,7 @@ The following figure shows a simple one-dimensional example of a Moreau envelope
 }
 \end{figure}
 
-\begin{enumerate}[(A)]
+\begin{enumerate}[label=(\Alph*)]
 \item
 The proximal operator gives a nice interpretation of classical gradient descent.  Consider the local linear approximation of $f(x)$ about a point $x_0$:
 $$
@@ -132,7 +155,7 @@ as our linear approximation to $l(x)$, plus the quadratic regularizer.  Now we a
 f(x) \approx \tilde{f}(x; x_0) = \tilde{l}(x; x_0) + \phi(x)   \, .
 \end{equation}
 
-\begin{enumerate}[(A)]
+\begin{enumerate}[label=(\Alph*)]
 \item Consider the surrogate optimization problem in which we minimize the approximation $\tilde{f}(x; x_0)$ in Equation \ref{eqn:pg_approx}, in lieu of our original objective $f(x)$. 
 $$
 \hat{x} = \arg \min_x \; \left\{   \tilde{l}(x; x_0) + \phi(x)  \right\} \, .
