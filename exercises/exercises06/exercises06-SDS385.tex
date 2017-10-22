@@ -30,6 +30,10 @@
 \usepackage[thinlines]{easytable}
 % \usepackage[letterpaper, landscape, margin=2in]{geometry}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\sign}{sign}
+\DeclareMathOperator*{\prox}{prox}
+
 
 
 %\usepackage[garamond]{mathdesign}
@@ -101,7 +105,7 @@ Intuitively, the Moreau envelope is a regularized version of $f$.  It approximat
 
 The following figure shows a simple one-dimensional example of a Moreau envelope and a proximal operator for the absolute-value function.
 
-\begin{figure}
+\begin{figure}[!h]
 \includegraphics{moreau_envelope.pdf}
 \caption{This picture shows a simple example of a proximal operator and Moreau envelope.  The solid black line shows the function $f(x) = |x|$, and the dotted line shows the corresponding Moreau envelope $E_{\gamma} f (x)$ with parameter $\gamma=1$.  The grey line shows the function 
   $|x| + (1/2)(x-x_0)^2$ for $x_0 = 1.5$, whose minimum (shown as a red cross)
@@ -121,6 +125,39 @@ f(x) \approx \hat{f}(x; x_0) = f(x_0) + (x - x_0)^{(t)} \nabla f(x_0) \, .
 $$
 
 Derive the proximal operator (with parameter $\gamma$) of the linear approximation $\hat{f}(x; x_0)$, and show that this proximal operator is identical to a gradient-descent step for $f(x)$ of size $\gamma$, starting from the point $x_0$.  In reflecting on this answer, make sure you feel comfortable with the following statement: ``the gradient step minimizes a local linear approximation of the function, subject to a quadratic regularizer that keeps the next iterate close to $x_0$ (where, presumably, the linear approximation is reasonable).''
+
+
+{\color{blue}
+
+Let's start by the definition of Moreau envelop and proximal operator
+
+\begin{eqnarray}
+E_{\gamma} f(x) &=& \min_{z } \left\{f(z) + \frac{1}{2\gamma} \enorm{z - x}^2  \right\}  \leq f(x) \\
+\prox_{\gamma} f(x) &=& \arg \min_{z } \left\{  f(z)+ \frac{1}{2\gamma} \enorm{z - x}^2  \right\} \, .
+\end{eqnarray}
+
+And also, we have the local linear approximation of $f(x)$ about a point $x_0$:
+$$
+f(x) \approx \hat{f}(x; x_0) = f(x_0) + (x - x_0)^{(t)} \nabla f(x_0) \, .
+$$
+
+
+So we derive the proximal operator as follows:
+\begin{align}
+\prox_\gamma \hat{f}(x;x_0) &= \argmin_x \left \{ f(x_0) + (x - x_0)^T\nabla f(x_0) + \frac{1}{2\gamma} \norm{x-x_0}_2^2  \right \} \\
+&= \argmin_x \left \{ x^T \nabla f(x_0) + \frac{1}{2\gamma} \norm{x-x_0}_2^2  \right \}
+\end{align}
+
+By setting the derivative equal to zero, we can find the value of x that minimizes the objective function
+
+\begin{align}
+	\nabla f(x_0) - \frac{1}{\gamma}(x-x_0) = 0
+	\implies x = x_0 + \gamma \nabla f(x_0)
+\end{align}
+
+ This shows the proximal operator is identical to a gradient-descent step for f (x) of size $\gamma$.
+
+}
 
 \item Many intermediate steps in statistical optimization problems can be written very compactly in terms of proximal operators of log-likelihoods or penalty functions.  For example, consider a negative log likelihood of the form
 $$
