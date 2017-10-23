@@ -171,6 +171,61 @@ assuming the relevant inverse exists.
 
 Then show that if we have a Gaussian sampling model of the form $(y \mid x) \sim \N(Ax, \Omega^{-1})$, then our negative log likelihood can be written in the form given above.  Here $A$ is like our feature matrix, $\Omega$ is a covariance matrix, and $x$ is like a regression vector.\footnote{This is notation from the optimization literature, rather than the stats literature.  It's important to be able to translate between both.}  Specify what $P$, $q$, and $r$ are for this negative log likelihood.
 
+{\color{blue}
+First, we want to show the proximal operator of the log likelihood of the form 
+$$
+l(x) = \frac{1}{2} x^{T} P x - q^{T} x + r \, .
+$$
+
+can be written as 
+
+$$
+\prox_{1/\gamma} l(x) = (P + \gamma I)^{-1} (\gamma  x + q) \, ,
+$$
+
+The proximal operator with parameter $1/\gamma$ of the l(x) is
+
+\begin{align}
+		\prox_{1 / \gamma} l(x) &= \argmin_z \left \{ l(z) + \frac{\gamma}{2} \norm{z-x}_2^2 \right \} \\
+		&= \argmin_z \left \{ \frac{1}{2}z^T P z - q^T z + r + \frac{\gamma}{2} \norm{z-x}_2^2 \right \}
+\end{align}
+
+setting the gradient of the objective function to zero gives:
+
+\begin{align}
+		Pz - q + \gamma(z - x) = 0 \implies
+		(P + \gamma I)z = (\gamma x + q) 
+	\end{align}
+Assuming that inverse of (P + $\gamma I$) exists,
+
+\begin{align}
+\implies z = (P + \gamma T)^{-1}(\gamma x + q)
+\end{align}
+
+
+for the next part, we assume $(y|x) \sim N(Ax, \Omega^{-1})$. We want to show that the negative log-likelihood can be written in the form $l(x) = \frac{1}{2} x^{T} P x - q^{T} x + r \ $.
+
+\begin{align}
+		l(x) &\propto \frac{1}{2}(y - Ax)^T \Omega (y - Ax) \\
+		&= \frac{1}{2}(y^T - x^TA^T)\Omega (y - Ax) \\
+		&= \frac{1}{2}(y^T\Omega y - y^T\Omega Ax - x^TA^T\Omega y + x^TA^T\Omega Ax) \\
+		&= \frac{1}{2}(y^T\Omega y - 2 y^T\Omega Ax + x^TA^T\Omega Ax) \\
+		&= \frac{1}{2}x^TA^T\Omega Ax - y^T\Omega Ax + \frac{1}{2}y^T\Omega y 
+\end{align}
+
+We can see that this is of the form $l(x) = \frac{1}{2} x^{T} P x - q^{T} x + r \ $. Here we have 
+
+\begin{align}
+&P = A^T\Omega A\\
+&q = A^T \Omega^T y\\ 
+&r = \frac{1}{2}y^T \Omega y.
+\end{align}
+
+
+
+
+
+}
 \item  Let $\phi(x) = \tau \Vert x \Vert_1$.  Express the proximal operator of this function in terms of the soft-thresholding function that we learned about in the last set of exercises.  (An element-wise expression is fine.)
 
 \end{enumerate}
