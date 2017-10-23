@@ -28,6 +28,7 @@
 \usepackage{algorithm2e}
 \usepackage[noend]{algpseudocode}
 \usepackage[thinlines]{easytable}
+\usepackage{tcolorbox}
 % \usepackage[letterpaper, landscape, margin=2in]{geometry}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -215,19 +216,39 @@ for the next part, we assume $(y|x) \sim N(Ax, \Omega^{-1})$. We want to show th
 
 We can see that this is of the form $l(x) = \frac{1}{2} x^{T} P x - q^{T} x + r \ $. Here we have 
 
+\begin{tcolorbox}
 \begin{align}
 &P = A^T\Omega A\\
 &q = A^T \Omega^T y\\ 
 &r = \frac{1}{2}y^T \Omega y.
 \end{align}
-
-
-
-
+\end{tcolorbox}
 
 }
+
+
+
 \item  Let $\phi(x) = \tau \Vert x \Vert_1$.  Express the proximal operator of this function in terms of the soft-thresholding function that we learned about in the last set of exercises.  (An element-wise expression is fine.)
 
+{\color{blue}
+if $\phi(x) = \tau \norm{x}_1$ then
+
+\begin{align}
+\prox_{\gamma} \phi(z) &= \argmin_z \left \{ \phi(x) + \frac{1}{2\gamma} \norm{z-x}_2^2 \right \} \\
+&= \argmin_z \left \{ \tau\norm{z}_1 + \frac{1}{2\gamma} \norm{z-x}_2^2 \right \} \\
+&= \argmin_z \left \{ \tau \sum_{i = 1}^p |z_i| + \frac{1}{2\gamma} \norm{z-x}_2^2 \right \}
+\end{align}
+
+
+for each component of $z_i$ we have:
+
+\begin{align}
+&\argmin_{z_i} \left \{ \tau |z_i| + \frac{1}{2\gamma} (z_i-x_i)^2 \right \}\\
+= &\argmin_{z_i} \left \{ \frac{1}{2} (x_i - z_i)^2 + \gamma \tau |z_i|  \right \}\\
+&=\text{sign}(x_i)(|x_i| - \gamma\tau)_+.
+\end{align}
+
+}
 \end{enumerate}
 
 
