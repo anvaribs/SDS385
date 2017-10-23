@@ -252,6 +252,11 @@ for each component of $z_i$ we have:
 \end{enumerate}
 
 
+% =================================================================
+% =================================================================
+% =================================================================
+
+
 \section{The proximal gradient method}
 
 Suppose that we have some objective function that can be expressed as $f(x) = l(x) + \phi(x)$, where $l(x)$ is differentiable but $\phi(x)$ is not.  The proximal gradient method is designed for precisely this situation.
@@ -279,6 +284,34 @@ Show that the solution to this problem is of the form
 \hat{x} = \prox_{\gamma} \phi(u) \, , \quad \mbox{where} \quad u = x_0 - \gamma \nabla l(x_0) \, .
 \end{equation}
 This is just the proximal operator of the non-smooth part of the objective, $\phi(x)$, evaluated at an intermediate gradient-descent step for the smooth part, $l(x)$.
+
+\bigskip
+{\color{blue}
+We want to find the solution to the surrogate optimization problem:  minimization of \\ $$\tilde{f}(x;x_0) = \tilde{l}(x;x_0) + \phi(x) \implies \hat{x} = \arg \min_x \; \left\{   \tilde{l}(x; x_0) + \phi(x)  \right\} \, .$$
+
+$$
+\hat{x} = \argmin_x \left \{ l(x_0) + (x - x_0)^{T} \nabla l(x_0) + \frac{1}{2\gamma}\norm{x - x_0}^2_2 + \phi(x) \right \}
+$$
+
+$l(x_0)$ is constant with respect to x. so we have
+
+\begin{align}
+&\argmin_x \left \{ \phi(x) + (x - x_0)^{T} \nabla l(x_0) + \frac{1}{2\gamma}\norm{x - x_0}^2_2 + \frac{\gamma}{2}\nabla l(x_0)^T\nabla l(x_0) \right \} \\
+=&\argmin_x \left \{ \phi(x) + (x - x_0)^{T} \nabla l(x_0) + \frac{1}{2\gamma}(x - x_0)^{T}(x - x_0) + \frac{\gamma}{2}\nabla l(x_0)^T \nabla l(x_0)\right \} \\
+=& \argmin_x \left \{ \phi(x) + \frac{1}{2\gamma} \left( 2\gamma (x - x_0)^{T} \nabla l(x_0) + (x - x_0)^{T}(x - x_0) + \gamma^2 \nabla l(x_0)^T \nabla l(x_0)\right) \right \} \\
+=& \argmin_x \left \{ \phi(x) + \frac{1}{2\gamma} \left(  (x - x_0)^{T}(x - x_0) + 2\gamma (x - x_0)^{T} \nabla l(x_0) + \gamma^2 \nabla l(x_0)^T \nabla l(x_0)\right) \right \} \\
+=& \argmin_x \left \{ \phi(x) + \frac{1}{2\gamma} \left(  (x - x_0 + \gamma \nabla l(x_0))^{T}(x - x_0 + \gamma \nabla l(x_0))\right) \right \} \\
+=& \argmin_x \left \{ \phi(x) + \frac{1}{2\gamma}  \norm{x - x_0 + \gamma \nabla l(x_0)}_2^2  \right \} \\
+=& \argmin_x \left \{ \phi(x) + \frac{1}{2\gamma}  \norm{x - (x_0 - \gamma \nabla l(x_0))}_2^2  \right \}\\
+=& \prox_\gamma \phi(u)  \text{,  where } u = x_{0} - \gamma \nabla l (x_0)
+\end{align}
+
+This means that the solution to the optimization is the proximal operator of the non-smooth part of the objective, $\phi(x)$, evaluated at an intermediate gradient-descent step for the smooth part, $l(x)$.
+
+}
+
+
+
 
 
 \item The \textit{proximal gradient} method is an iterative algorithm in which we repeatedly form the approximation in Equation \ref{eqn:pg_approx} about the current point, and minimize this surrogate function using Equation \ref{eqn:pg_xhat}.  Written concisely,
