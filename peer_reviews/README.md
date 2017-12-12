@@ -2,9 +2,12 @@
 
 Here are the link to the peer-reviews:
 
-[Anthony Dutcher](Anthony_Dutcher/)
-[Bowen Hua](Bowen_Hua)
-[last peer review](LAST_PEER_REVIEW/)
+* [Anthony Dutcher](Anthony_Dutcher/)
+
+* [Bowen Hua](Bowen_Hua)
+
+* [last peer review](LAST_PEER_REVIEW/)
+
 
 
 
