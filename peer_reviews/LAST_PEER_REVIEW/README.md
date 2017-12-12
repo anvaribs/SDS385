@@ -14,8 +14,13 @@ As we discussed in class, please send me your last peer review by Wednesday, Dec
 
 
 **Bowen Hua** --> His assignment presentations was very clear and to the point. He presented ADMM method in a very nice and concise way. His code was always very clear and step-by-step. I learned alot from him. Thanks Bowen, you are awesome.
+
+
 **Mauricio Garcia** --> I also learned many useful thing from Mauricio. He had a great insight into some of the subjects that we learned in this class, and his ability to convey those insights were extraordinary. Thanks Mauricio and keep up the great work.
+
+
 **Aaron Webb** --> Aaron in-class presentation on gradient boosted trees and their application in Physics were great. I enjoyed his presentation and learned a great deal from it.
+
 
 And finally, I want to give a shout-out to **James Scott** for being such a great professor. He did a great job of leading the class and clarifying some of the subjects. I, personally, learned a lot from him. Thank you James, I really appreciate your help and support.
 
