@@ -12,7 +12,9 @@ Here are the link to the peer-reviews:
 
 
 
-peer review pairings and FAQ
+
+
+### peer review pairings and FAQ
 
 ====================================================================
 
@@ -30,6 +32,18 @@ Ciara reviews Hyunsang reviews Rimli reviews Ciara
 Python (5)
 Amin - Tony
 Bowen reviews Ashutosh reviews Aaron reviews Bowen
+
+Here are the pairings (or three-cycles) for peer review #2:
+
+R (7)
+Mauricio - Rimli
+Yinan - Ciara
+Yanxin reviews Hyunsang reviews Natalia reviews Yanxin
+
+Python (5)
+Amin - Bowen
+Tony reviews Aaron reviews Ashutosh reviews Tony
+
 
 **How should I turn this in?**
 
