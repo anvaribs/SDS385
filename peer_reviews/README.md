@@ -22,7 +22,7 @@ Here are the link to the peer-reviews:
 You can find everyone's GitHub pages here:
 https://github.com/jgscott/SDS385/tree/master/team
 
-Here are the pairings (or three-cycles) for peer review #1:
+**Here are the pairings (or three-cycles) for peer review #1:**
 
 R (7)
 Mauricio - Yinan
@@ -33,7 +33,7 @@ Python (5)
 Amin - Tony
 Bowen reviews Ashutosh reviews Aaron reviews Bowen
 
-Here are the pairings (or three-cycles) for peer review #2:
+**Here are the pairings (or three-cycles) for peer review #2:**
 
 R (7)
 Mauricio - Rimli
