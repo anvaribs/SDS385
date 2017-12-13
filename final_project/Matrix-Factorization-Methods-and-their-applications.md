@@ -57,13 +57,6 @@ Notice that in this kind of data structure for the rating matrix, the matrix wil
 
 
 
-## Exercises 9: matrix factorization
-
-In statistical modeling, we often need to compute a low-rank approximation to a large matrix. The standard old-school approach for doing so is *principal components analysis,* or PCA, which is closely related to the [singular value decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition) of a matrix.
-In this set of exercises, you will explore an approach for computing a modified PCA-like factorization of a matrix. Specifically, you will incorporate regularization on the principal components, in the form of a penalty function. This leads to a [biconvex](https://en.wikipedia.org/wiki/Biconvex_optimization) optimization problem that can be solved quite rapidly.
-
-
-
 # Refrences:
 - A review of principal components analysis in [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/), Section 10.2.
 - The paper ["A penalized matrix decomposition, with applications to sparse principal components and canonical correlation analysis"](https://faculty.washington.edu/dwitten/Papers/pmd.pdf), by Witten, Tibshirani, and Hastie.
