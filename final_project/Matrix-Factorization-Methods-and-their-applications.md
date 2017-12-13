@@ -37,7 +37,7 @@ in location-based CF approaches, the algorithm tries to get an $$R^d$$ embedding
 
 To see how we can use matrix factorization to do object recommendation in a collaborative filtering setting, first let’s see how the data structure should look like. We assume that we have a matrix of ratings and by assuming that we have $$N_1$$ users and $$N_2$$ objects we setup our rating matrix as below:
 
-![](https://d2mxuefqeaa7sj.cloudfront.net/s_B623DF4E3920788CF9583F4A05F5A41695A80A2EAF6D3C32053CFEE8F6F48876_1513196113550_Screenshot+2017-12-13+14.14.45.png)
+![](https://d2mxuefqeaa7sj.cloudfront.net/s_B623DF4E3920788CF9583F4A05F5A41695A80A2EAF6D3C32053CFEE8F6F48876_1513196113550_Screenshot+2017-12-13+14.14.45.png =100x20)
 
 
 
