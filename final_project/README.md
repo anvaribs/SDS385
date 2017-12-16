@@ -19,3 +19,6 @@ link to the project documentation: https://paper.dropbox.com/doc/present/CFpZe33
 link to the project documentation in pdf format: [Yet to be added](https://paper.dropbox.com/doc/present/CFpZe33Gl4StoIsPXwZxd)
 
 link to the playground that I am testing different methods: [Playground](Playground_NMF.ipynb)
+
+link to the implementation of non-negative matrix factorization with SGD - it is very slow to train[NMF with
+SGD](NMF_SGD_and_topic_modeling.ipynb)
