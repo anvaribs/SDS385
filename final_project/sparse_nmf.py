@@ -129,6 +129,67 @@ def matrix_factorization(X, H=None, n_components=None,
     return W, H, n_iter
 
 
+# def matrix_factorization(X, H=None, n_components=None,
+#                                init='random', update_H=True,
+#                                tol=1e-4, max_iter=200, alpha=0.01,
+#                                beta=0.02):
+#
+#     n_samples, n_features = X.shape
+#     if n_components is None:
+#         n_components = n_features
+#
+#     # check W and H, or initialize them
+#     if not update_H:
+#         W = np.zeros((n_samples, n_components))
+#     else:
+#         W, H = _initialize_nmf(X, n_components, init=init, eps=1e-6)
+#
+#     n_iter = 0
+#     e_before = 0
+#     xs, ys = X.nonzero()
+#
+#     for step in xrange(max_iter):
+#         n_iter = step + 1
+#
+#         V = np.dot(W,H)
+#         W_temp = W
+#
+#         for i in xrange(n_samples):
+#             for k in xrange(n_components):
+#                 s1 = 0
+#                 s2 = 0
+#                 for j in xrange(n_features):
+#                     s1 += X[i][j] * H[k][j] / V[i][j]
+#                     s2 += H[k][j]
+#                 W[i][k] = s1 * W[i][k] / s2
+#
+#         if update_H:
+#             for j in xrange(n_features):
+#                 for k in xrange(n_components):
+#                     s1 = 0
+#                     s2 = 0
+#                     for i in xrange(n_samples):
+#                         s1 += W[i][k] * X[i][j] / V[i][j]
+#                         s2 += W_temp[i][k]
+#                     H[k][j] = s1 * H[k][j] / s2
+#
+#         e = 0
+#         for i in xrange(n_samples):
+#             for j in ys[xs==i]:
+#                 e = e + (X[i][j] - V[i][j])**2 / 2
+#
+#         # e = e + (beta/2) * ( (W*W).sum() + (H*H).sum() )
+#         if step > 0:
+#             if abs(e/e_before - 1) < tol:
+#                 break
+#         e_before = e
+#
+#     if n_iter == max_iter:
+#         print ("Maximum number of iteration %d reached. Increase it to"
+#                       " improve convergence." % max_iter)
+#
+#     return W, H, n_iter
+
 
 
 
