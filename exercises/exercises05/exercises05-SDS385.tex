@@ -131,6 +131,10 @@ y & \mbox{if $y \geq \lambda$} \\
 $$
 
 
+{\color{blue}
+See the ipython notebook.
+}
+
 \item Here's a simple toy example to illustrate how soft thresholding can be used to enforce sparsity in statistical models.
 
 Suppose we observe data from the following statistical model:
@@ -159,6 +163,11 @@ Make sure that the MSE actually obtains a minimum across the grid of $\lambda$ v
 Try this for several different configurations of $\theta$.  How does the optimal $\lambda$ change as the sparsity in $\theta$ changes?\footnote{Here it's enough to assess the optimal $\lambda$ using the good old-fashioned ``plot and point'' strategy for optimization.  That is, you plot the function, point at the minimum, and say proudly, ``Here's the minimum.''}
 
 Note: like I said, this is an intuition-building exercise.  You could never choose $\lambda$ this way for a real problem, because it requires knowledge of the truth.
+
+
+{\color{blue}
+See the ipython notebook for the implementation and results.
+}
 
 \end{enumerate}
 
@@ -218,6 +227,11 @@ $$
 \mathrm{MSE}(\hat \beta_{\lambda}) = \frac{1}{n} \sum_{i=1}^n (y_i - x_i^T \hat \beta_{\lambda}^2) = \frac{1}{n} \Vert y - X \hat \beta_{\lambda} \Vert_2^2 \, .
 $$
 
+
+{\color{blue}
+See the ipython notebook for the implementation and results.
+}
+
 \item A natural way to choose $\lambda$ is to minimize the expected out-of-sample prediction error.  Suppose that $(x_{\star}, y_{\star})$ is a future data point from the same population/data-generating process as the original data.  The goal would be to make the expected error
 $$
 \mathrm{MOOSE}(\hat{\beta}_{\lambda}) =  E \left\{ (y_{\star} - \hat{y}_{\star} )^2 \right\} = E \left\{ (y_{\star} - x_\star^T \hat{\beta}_{\lambda} )^2 \right\} 
@@ -230,6 +244,11 @@ I leave it to you to figure out the details of cross validation, including how b
 
 Plot your cross-validated estimate of $\mathrm{MOOSE}(\hat{\beta}_{\lambda})$ across the solution path, as a function of $\lambda$.  How does it compare with the \textit{in-sample} mean-squared error from (A)?
 
+
+{\color{blue}
+See the ipython notebook for the implementation and results.
+}
+
 \item Cross validation is one particularly simple way, based on the idea of resampling your data, to estimate the generalization error of a model.  (Its reliance on resampling means that it shares a lot in common with \href{https://en.wikipedia.org/wiki/Bootstrapping_(statistics)}{the bootstrap} as a way to estimate the standard error of a model parameter.)
 
 However, cross-validation isn't the only way to estimate generalization error.  Another such way is called the $C_p$ statistic, proposed by Collin Mallows (and therefore often called \textit{Mallows' $C_p$}).  For a linear regression model, the $C_p$ statistic is defined as
@@ -239,6 +258,11 @@ $$
 where $s_{\lambda}$ is the degrees of freedom of the fit (i.e.~the number of nonzero parameters selected at that particular value of $\lambda$), and $\hat \sigma^2 = \mathrm{var}(\epsilon)$ is an estimate of the residual variance.  You can interpret the $C_p$ statistic as the in-sample mean-squared error, plus a penalty for in-sample optimism.  As you add parameters to a regression model, MSE goes down and the penalty goes up. 
 
 Compute (and plot) the $C_p$ statistic across the solution path, as a function of $\lambda$.  How does it compare to the in-sample MSE, and to the cross-validated estimate of generalization error from (B)?  Show these all on the same plot.  Do they lead to similar choices of $\lambda$?
+
+
+{\color{blue}
+See the ipython notebook for the implementation and results.
+}
 
 \paragraph{Note 1:} In general, the main tradeoffs between cross-validation and the $C_p$ statistic are these:
 \begin{itemize}

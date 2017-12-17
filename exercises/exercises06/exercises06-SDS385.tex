@@ -36,6 +36,7 @@
 \DeclareMathOperator*{\prox}{prox}
 
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\enorm}[1]{\Vert #1 \Vert_2}
 
 
 %\usepackage[garamond]{mathdesign}
@@ -201,7 +202,7 @@ setting the gradient of the objective function to zero gives:
 Assuming that inverse of (P + $\gamma I$) exists,
 
 \begin{align}
-\implies z = (P + \gamma T)^{-1}(\gamma x + q)
+\implies z = (P + \gamma I)^{-1}(\gamma x + q)
 \end{align}
 
 
@@ -380,6 +381,10 @@ The first step involves the proximal operator of the penalty function, evaluated
 Implement this acceleration scheme in your proximal gradient code, and compare its convergence speed to that of the unacceleration version.  Does the value of the objective goes down at each and every step?  Do you get to the minimum faster?
 
 Note: you can use this acceleration trick in ordinary gradient descent, too.
+
+{\color{blue}
+See the ipython notebook for the implementation and results.
+}
 
 \end{enumerate}
 
