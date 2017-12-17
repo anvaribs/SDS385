@@ -16,7 +16,7 @@ For the purpose of completion, and as a good direction for future work in this p
 
 link to the project documentation: https://paper.dropbox.com/doc/present/CFpZe33Gl4StoIsPXwZxd
 
-link to the project documentation in pdf format: [Yet to be added](https://paper.dropbox.com/doc/present/CFpZe33Gl4StoIsPXwZxd)
+link to the project documentation in pdf format: [Yet to be reformatted](https://github.com/anvaribs/SDS385/blob/master/final_project/Matrix%20Factorization%20Methods%20and%20their%20applications_%20Probabilistic%20%26%20Non-Negative%20Factorization.pdf)
 
 link to the playground that I am testing different methods: [Playground](Playground_NMF.ipynb)
 
